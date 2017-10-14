@@ -79,7 +79,7 @@ public class CombatScript : MonoBehaviour {
             if(!passTurnPressed && movementsAvailable())
             {
                 unitToMove = selectUnit();
-                if (unitToMove != null && unitToMove.playerOwner == this.currentPlayer) {
+                if (unitToMove != null && unitToMove.playerOwner == this.currentPlayer && !unitToMove.wasMoved) {
                     currentState = COMBAT_STATES.SELECT_DEFENDER;
                     Debug.Log("canviant a defender");
                 }
@@ -90,6 +90,7 @@ public class CombatScript : MonoBehaviour {
             unitToAttack = selectUnit();
             if (unitToAttack != null && unitToAttack.playerOwner != this.currentPlayer) {
                 unitToAttack.getHitBy(unitToMove);
+                unitToMove.move();
                 unitToMove = null;
                 unitToAttack = null;
                 if (!movementsAvailable()) { currentState = COMBAT_STATES.CHANGING_TURN; }
