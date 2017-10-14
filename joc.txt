@@ -4,3 +4,4 @@ Atributs:	Vida
 Combat:		Per torns, 1 accio per unitat i torn
 		Unitat aliada X ataca unitat enemiga Y (seleccionades via tap)
 		Contra IA senzilla o dos jugadors al mateix mobil
+		Aaleatorietat en atacs
