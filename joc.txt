@@ -1,0 +1,2 @@
+unitats:	cavalleria > infanteria > arquers > cavalleria
+		cavalleria > arquers > infanteria > cavalleria
