@@ -55,11 +55,8 @@ public class CombatScript : MonoBehaviour {
     void playTurn() {
         if (currentState == COMBAT_STATES.CHANGING_TURN)
         {
-            unitToAttack.getHitBy(unitToMove);
-            this.unitToMove = null;
-            this.unitToAttack = null;
-            resetUnitsMovement();
             currentPlayer = (currentPlayer % 2) + 1;
+            resetUnitsMovement();
             currentState = COMBAT_STATES.SELECT_ATTACKER;
             if (gameIsOver())
             {
@@ -92,7 +89,11 @@ public class CombatScript : MonoBehaviour {
         {
             unitToAttack = selectUnit();
             if (unitToAttack != null && unitToAttack.playerOwner != this.currentPlayer) {
-                currentState = COMBAT_STATES.CHANGING_TURN;
+                unitToAttack.getHitBy(unitToMove);
+                unitToMove = null;
+                unitToAttack = null;
+                if (!movementsAvailable()) { currentState = COMBAT_STATES.CHANGING_TURN; }
+                else { currentState = COMBAT_STATES.SELECT_ATTACKER; }
             }
         }
 
